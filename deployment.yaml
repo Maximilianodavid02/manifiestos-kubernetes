@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-website
+  template:
+    metadata:
+      labels:
+        app: static-website
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: website-volume
+          mountPath: /usr/share/nginx/html  # Este es el directorio donde se servirán los archivos.
+      volumes:
+      - name: website-volume
+        persistentVolumeClaim:
+          claimName: static-website-pvc  # Usamos el PVC para acceder al volumen persistente.
+
+

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-example
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+    path: /mnt/c/Users/Maxi/Desktop/TP-Computacion\ Nube/sitio-web/static-website  # Tu ruta local donde está el contenido.
+    type: Directory
+
+
