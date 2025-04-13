@@ -1,29 +1,48 @@
 # Proyecto Kubernetes - Minikube
 
-Este proyecto está diseñado para crear un entorno Kubernetes en Minikube para desplegar una aplicación web estática personalizada. A continuación se describen los pasos seguidos y las herramientas utilizadas para configurar el entorno y desplegar la aplicación.
+Pasos para Reproducir el Proyecto
+-Clonar el Repositorio
+Clona el repositorio del proyecto con el siguiente comando:
+git clone https://github.com/ewojjowe/static-website.git
+cd static-website
+-Iniciar el Clúster de Minikube
+Inicia Minikube para crear un entorno Kubernetes local:
+minikube start
+-Crear el Volumen Persistente
+Asegurar de que el volumen persistente esté creado. Este volumen se utilizará para montar los archivos HTML y CSS dentro del contenedor Nginx.
+kubectl apply -f pvc.yaml
+-Desplegar el Contenedor Nginx
+Aplicae el manifiesto para desplegar el contenedor Nginx y montar el volumen persistente en el directorio /usr/share/nginx/html:
+con el comando:
+kubectl apply -f deployment.yaml
+Este manifiesto crea un contenedor Nginx que servirá el contenido del sitio web estático desde el volumen persistente.
+-Exponer el Servicio
+Para exponer el sitio web fuera del clúster, crea un servicio de tipo NodePort con el siguiente comando:
+kubectl apply -f service.yaml
+-Verificar el Despliegue
+Verificar que el pod del sitio web esté en ejecución:
+kubectl get pods
+Deberíamos ver algo como esto:
+sql
+NAME                                     READY   STATUS    RESTARTS   AGE
+static-website-76d4cf8569-wnrzq           1/1     Running   0          5m
+-Acceder al Sitio Web
+Obtén la IP de Minikube y el puerto del NodePort para acceder al sitio web:
+minikube ip
+Accede al sitio web con la IP y el puerto:
+http://<minikube-ip>:<node-port>
+-Verificar los Archivos del Sitio Web
+Para verificar que el volumen se montó correctamente y los archivos del sitio web están disponibles, accede al pod y revisa el directorio:
+kubectl exec -it static-website-76d4cf8569-wnrzq -- ls /usr/share/nginx/html
+Deberías ver los archivos del sitio web, como index.html y style.css.
+-Detener el Clúster
+Cuando termines, puedes detener Minikube:
+minikube stop
 
-Tenemos el repositorio static-website con el fork clonada y personalizado el html y css
-Y el repositorio llamado manifiestos-kubernetes donde se encuentra el entorno kubernetes con los deployment
-
-Entorno del trabajo fue Minikube, Docker, Visual studio Code, GitHub, use debian en WSL2.
-los pasos del despliegue :
-clonar repo, aplicar los archivos .yaml de kubernetes y la la verificacion con kubectl 
-algunos comandos utilizados fueron kubectl, git, docker, etc
-hice fork a la URL que especficaba en el pdf de la actividad , lo personalize en visual studio code a mi gusto, y lo comitie, como:
-1- navego la carpeta de mi repositorio local 
-2- hago un git status para revisar el estado del repositoriouna vez parado en esa carpeta
-3- agrego los cambios al area de staging com un git add .
-4- creo un commit con un mensaje claro de lo que hice, con el mando git commit -m "Mensaje"
-5- subo los cambios a mi repositorio con el comando git push origin main
-
-Despues creo los manifiestos de kubernetes 
--1 me voy a la carpeta de manifiestos-kubernetes local en la terminal de gitbash
--2 una vez en la carpeta, creo los manifistos de kubernetes, los hago dentro de la carpeta de manifiestos-kuberntes y abro visual sutdio code para hacer los yaml, que son: depolyment.yaml, pv.yaml, pvc.yaml y service.yaml
- Despues creo y configuro el cluster en Minikube con Minikube start , despues verifico que este corriendo con minikube status, despues verifico el entorno de kubernetes con kubectl get nodes
-despues de haber creado creado todo eso aplico los mos manifiestos de kubernetes con el comando kubectl apply -f /y la tura a mi manifiesto kubernetes/.yaml
-despues verifico que el pod este corriendo con kubectl get pods, verifico el servicio con kubectl get services
-y Despues acceso a la aplicacion desde el navegador con minikube IP y me devuelve una IP y la pego en el navegador
-
+deployment.yaml: Manifiesto de Kubernetes para el despliegue del contenedor Nginx con el volumen persistente.
+service.yaml: Manifiesto de Kubernetes para exponer el servicio como un NodePort.
+static-website/: Contiene los archivos del sitio web estático (por ejemplo, index.html y style.css).
+pvc.yaml: Manifiesto de Kubernetes para crear un volumen persistente (PVC).
 
 
 
