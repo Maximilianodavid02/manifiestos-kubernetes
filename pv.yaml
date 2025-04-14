@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/c/Users/Maxi/Desktop/TP-Computacion\ Nube/sitio-web/static-website  # Tu ruta local donde está el contenido.
+    path: /mnt/web
     type: Directory
 
 
