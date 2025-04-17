@@ -5,9 +5,11 @@
 - **Git**
 - **Linux** en mi caso Debian **WSL**
 
-###Clonar repositorio en bash
+##Clonar repositorio en bash
 -**repositorio de la pagina web:**
-git clone https://github.com/Maximilianodavid02/static-website.git
+```bash
+git clone https://github.com/NicoGan/web_tp_cn.git
+```
 --*Repositorio de los manifiestos kubernetes:**
 git clone https://github.com/Maximilianodavid02/manifiestos-kubernetes.git
 
