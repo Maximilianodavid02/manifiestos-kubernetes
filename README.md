@@ -6,34 +6,46 @@
 - **Linux** en mi caso Debian **WSL**
 
 ##Clonar repositorio en bash
--**repositorio de la pagina web:**
+descarga los siguientes proyectos:
+1. **repositorio de la pagina web:**
 ```bash
-git clone https://github.com/NicoGan/web_tp_cn.git
+git clone https://github.com/Maximilianodavid02/static-website.git
 ```
---*Repositorio de los manifiestos kubernetes:**
+2. *Repositorio de los manifiestos kubernetes:**
+```bash
 git clone https://github.com/Maximilianodavid02/manifiestos-kubernetes.git
+```
 
-###Para iniciar Minikube montamos el archivo:**
-Desde la terminal Linux Debian WSL, donde esta tu carpeta 'static-website', ejecutar el comando en bash:
-'''minikube start --mount --mount-string="/home/maxi/static-website:/mnt/web"'''
+###Para iniciar Minikube montamos el archivo:
+Desde la terminal Linux Debian WSL, donde esta tu carpeta `static-website`, ejecutar el comando en bash:
+```bash
+minikube start --mount --mount-string="${PWD}/static-website:/mnt/web"
+```
 
 **Eso si IMPORTANTISIMO**
--Reemplazar 'static-website' por la **ruta real donde tengas el index.html** si es diferente.
--Con esto montamos la carpeta local dentro de Minikube en la ruta '/mnt/web'.
+-Reemplazar `static-website` por la **ruta real donde tengas el index.html** si es diferente.
+-Con esto montamos la carpeta local dentro de Minikube en la ruta `/mnt/web`.
 
 ###Verificamos Montaje
-Abrir **Docker Desktop** y verificar que el volumen '/mnt/web' se haya montado dentro de minikube 
+Abrir **Docker Desktop** y verificar que el volumen `/mnt/web` se haya montado dentro de minikube 
 
 ###Aplicamos los manifiestos de kubernetes.
 Una vez parado en el proyecto donde clonaste los manifiestos, tirar el comando:
-'''kubectl apply -R -f manifiestos-kubernetes
+```bash
+kubectl apply -R -f manifiestos-kubernetes
+```
 
 ###A continuacion, verificamos los servicios en ejecucion con el comando:
-'''kubectl get service'''
+```bash
+kubectl get service
+```
 
 ###Accedemos a la pagina web con el comando:
-'''minikube service static-website-service (tiene que ser el mismo nombre que tiene el metadata del service.yaml)'''
-con este comando comando te aparecera un http://...... apretamos CTRL y click derecho.
+```bash
+minikube service static-website-service
+```
+(tiene que ser el mismo nombre que tiene el metadata del service.yaml)
+Con este comando comando te aparecera un http://...... apretamos CTRL y click derecho.
 **Y LISTO** ya tenemos nuestro sitio web corriendo desde un entorno kubernetes usando Minikube 
 
 
