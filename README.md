@@ -16,6 +16,12 @@ git clone https://github.com/Maximilianodavid02/static-website.git
 git clone https://github.com/Maximilianodavid02/manifiestos-kubernetes.git
 ```
 ---
+###Importante si usas WSL o una VM:
+-Si estás usando WSL o una máquina virtual Linux, debés mover las carpetas de los repositorios dentro del sistema de archivos de Linux para que Minikube pueda montarlas correctamente.
+Por ejemplo:
+1.copiar ls carpetas a /home/tu_usuario..
+2.Asegurarse que desde el entorno linux donde correras Minikub eesten accesibles.
+
 ###Para iniciar Minikube montamos el archivo:
 Desde la terminal Linux Debian WSL, donde esta tu carpeta `static-website`, ejecutar el comando en bash:
 ```bash
