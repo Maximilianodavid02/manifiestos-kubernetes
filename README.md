@@ -22,7 +22,7 @@ Desde la terminal Linux Debian WSL, donde esta tu carpeta `static-website`, ejec
 minikube start --mount --mount-string="${PWD}/static-website:/mnt/web"
 ```
 
-**Eso si IMPORTANTISIMO**
+**IMPORTANTISIMO**
 -Reemplazar `static-website` por la **ruta real donde tengas el index.html** si es diferente.
 -Con esto montamos la carpeta local dentro de Minikube en la ruta `/mnt/web`.
 ---
